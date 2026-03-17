@@ -1,3 +1,4 @@
+import logging
 import os
 from datetime import datetime
 
@@ -103,7 +104,7 @@ def search_all(geometry, item_types, date_from, date_to, cloud_max):
                     }
                 )
         except Exception as e:
-            print(f"Warning: search failed for {item_type}: {e}")
+            logging.warning("search failed for %s: %s", item_type, e)
     return sort_results(all_results)
 
 

@@ -146,3 +146,35 @@ def test_search_all_skips_failed_item_type_gracefully():
         cloud_max=0.20,
     )
     assert results == []
+
+
+# --- get_thumbnail ---
+
+@resp_mock.activate
+def test_get_thumbnail_returns_bytes_and_content_type():
+    resp_mock.add(
+        resp_mock.GET,
+        "https://api.planet.com/data/v1/item-types/SkySat-Collect/items/abc123/thumb",
+        body=b"\x89PNG\r\n",
+        status=200,
+        headers={"Content-Type": "image/png"},
+    )
+    data, ct = planet_client.get_thumbnail("SkySat-Collect", "abc123")
+    assert data == b"\x89PNG\r\n"
+    assert ct == "image/png"
+
+
+# --- get_tile ---
+
+@resp_mock.activate
+def test_get_tile_returns_bytes_and_content_type():
+    resp_mock.add(
+        resp_mock.GET,
+        "https://tiles.planet.com/data/v1/SkySat-Collect/abc123/10/512/512.png",
+        body=b"TILE_DATA",
+        status=200,
+        headers={"Content-Type": "image/png"},
+    )
+    data, ct = planet_client.get_tile("SkySat-Collect", "abc123", 10, 512, 512)
+    assert data == b"TILE_DATA"
+    assert ct == "image/png"
