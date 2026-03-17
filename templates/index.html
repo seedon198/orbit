@@ -1,2 +1,154 @@
 <!DOCTYPE html>
-<html><body><h1>Planet Viewer — coming soon</h1></body></html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planet Viewer</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css" />
+  <link rel="stylesheet" href="/static/css/app.css" />
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div id="top-bar">
+    <div id="logo">🛰 PLANET</div>
+
+    <div class="control-group">
+      <label>SOURCE</label>
+      <div id="source-dropdown">
+        <button id="source-toggle">
+          <span id="source-label">All sources</span> ▾
+        </button>
+        <div id="source-popover">
+          <div class="source-option">
+            <input type="checkbox" id="src-skysat" value="SkySat-Collect" checked />
+            <label for="src-skysat"><span class="badge skysat">SkySat</span> ~0.5m</label>
+          </div>
+          <div class="source-option">
+            <input type="checkbox" id="src-ps" value="PSScene" checked />
+            <label for="src-ps"><span class="badge">PS</span> ~3m</label>
+          </div>
+          <div class="source-option">
+            <input type="checkbox" id="src-s2" value="Sentinel2L1C" checked />
+            <label for="src-s2"><span class="badge">S2</span> 10m</label>
+          </div>
+          <div class="source-option">
+            <input type="checkbox" id="src-ls" value="Landsat8L1T" checked />
+            <label for="src-ls"><span class="badge">LS8</span> 30m</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>DATE RANGE</label>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <input type="text" id="date-from" class="date-input" placeholder="YYYY-MM-DD" />
+        <span class="date-sep">→</span>
+        <input type="text" id="date-to" class="date-input" placeholder="YYYY-MM-DD" />
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>MAX CLOUD</label>
+      <div id="cloud-row">
+        ☁ <input type="range" id="cloud-slider" min="0" max="100" value="20" />
+        <span id="cloud-value">20%</span>
+      </div>
+    </div>
+
+    <button id="search-btn">🔍 Search</button>
+
+    <div class="topbar-divider"></div>
+
+    <div class="control-group">
+      <label>DRAW MODE</label>
+      <div id="draw-tools">
+        <button class="draw-btn active" data-mode="polygon" title="Draw polygon">✏️</button>
+        <button class="draw-btn" data-mode="rectangle" title="Draw rectangle">⬜</button>
+        <button class="draw-btn" data-mode="circle" title="Draw circle">⭕</button>
+        <button class="draw-btn" data-mode="marker" title="Place point + radius">📍</button>
+        <button class="draw-btn" data-mode="clear" title="Clear drawing">🗑</button>
+      </div>
+    </div>
+
+    <div class="control-group" id="opacity-group">
+      <label>OVERLAY OPACITY</label>
+      <div id="opacity-row">
+        <input type="range" id="opacity-slider" min="0" max="100" value="80" />
+        <span id="opacity-value">80%</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAP -->
+  <div id="map"></div>
+
+  <!-- FLOATING RESULTS PANEL -->
+  <div id="results-panel">
+    <div id="results-header">
+      <span id="results-count">— results</span>
+      <button id="sort-toggle">recent ▾</button>
+    </div>
+    <div id="results-list">
+      <div id="results-empty">Draw an area and click Search to find imagery.</div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div id="timeline">
+    <div id="timeline-header">
+      <span id="timeline-label">TIMELINE</span>
+      <span id="timeline-info"></span>
+      <div id="speed-controls">
+        <span class="label">SPEED</span>
+        <button class="speed-btn active" data-speed="1">1×</button>
+        <button class="speed-btn" data-speed="2">2×</button>
+        <button class="speed-btn" data-speed="4">4×</button>
+      </div>
+    </div>
+    <div id="timeline-controls">
+      <div id="playback">
+        <button class="play-btn" id="btn-first" title="First">⏮</button>
+        <button class="play-btn" id="btn-play" title="Play/Pause">▶</button>
+        <button class="play-btn" id="btn-last" title="Last">⏭</button>
+      </div>
+      <div id="slider-container">
+        <div id="slider-track">
+          <div id="slider-fill"></div>
+          <div id="slider-handle"></div>
+        </div>
+        <div id="slider-labels">
+          <span id="label-start"></span>
+          <span id="label-current"></span>
+          <span id="label-end"></span>
+        </div>
+      </div>
+      <div id="calendar-controls">
+        <button id="calendar-btn">📅 Calendar</button>
+        <input type="text" id="calendar-input" style="display:none" />
+        <div id="current-date-display"></div>
+      </div>
+    </div>
+    <div id="timeline-legend">
+      <span class="legend-item"><span class="legend-dot skysat"></span>SkySat</span>
+      <span class="legend-item"><span class="legend-dot other"></span>Other</span>
+      <span class="legend-item"><span class="legend-dot selected"></span>Selected</span>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast"></div>
+
+  <!-- SCRIPTS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13"></script>
+  <script src="/static/js/map.js"></script>
+  <script src="/static/js/search.js"></script>
+  <script src="/static/js/results.js"></script>
+  <script src="/static/js/timeline.js"></script>
+</body>
+</html>
