@@ -111,6 +111,7 @@
   }
 
   function onTrackClick(e) {
+    if (dates.length === 0) return;
     if (e.target.classList.contains("timeline-dot")) return;
     var track = document.getElementById("slider-track");
     var rect = track.getBoundingClientRect();
@@ -139,6 +140,8 @@
   }
 
   function jumpToResult(result) {
+    // NOTE: This function must NOT call jumpToDateIdx — doing so would create
+    // an infinite call cycle: selectResult → jumpToResult → jumpToDateIdx → selectResult.
     var d = isoToDate(result.acquired);
     if (!d) return;
     var idx = dates.indexOf(d);

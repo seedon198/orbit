@@ -157,7 +157,12 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     })
-      .then(function (resp) { return resp.json(); })
+      .then(function (resp) {
+        if (!resp.ok) {
+          throw new Error("Server error " + resp.status);
+        }
+        return resp.json();
+      })
       .then(function (data) {
         btn.disabled = false;
         btn.textContent = "🔍 Search";

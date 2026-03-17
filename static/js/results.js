@@ -116,16 +116,14 @@
 
   // ── Tile error callback ───────────────────────────────────────────────────
   function onTileError() {
-    var idx = window.AppState.currentIndex;
-    var list = document.getElementById("results-list");
-    var cards = list.querySelectorAll(".result-card");
-    if (cards[idx]) {
-      var existing = cards[idx].querySelector(".result-tile-error");
+    var selected = document.querySelector(".result-card.selected");
+    if (selected) {
+      var existing = selected.querySelector(".result-tile-error");
       if (!existing) {
         var err = document.createElement("div");
         err.className = "result-tile-error";
         err.textContent = "⚠ Tiles unavailable";
-        cards[idx].appendChild(err);
+        selected.appendChild(err);
       }
     }
   }
