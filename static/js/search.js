@@ -158,19 +158,16 @@
       body: JSON.stringify(payload),
     })
       .then(function (resp) {
-        if (!resp.ok) {
-          throw new Error("Server error " + resp.status);
-        }
-        return resp.json();
+        return resp.json().then(function (data) {
+          if (!resp.ok) {
+            throw new Error(data.error || "Server error " + resp.status);
+          }
+          return data;
+        });
       })
       .then(function (data) {
         btn.disabled = false;
         btn.textContent = "🔍 Search";
-
-        if (data.error) {
-          window.showToast("Search error: " + data.error);
-          return;
-        }
 
         window.AppState.results = data.results || [];
         window.AppState.currentIndex = -1;
