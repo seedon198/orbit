@@ -125,6 +125,8 @@
         geometry = circleToPolygon(center.lat, center.lng, radius, 64);
       } else if (type === "marker") {
         var latlng = drawnLayer.getLatLng();
+        // Note: window.prompt is synchronous and will not work in sandboxed iframes.
+        // For a local dev tool this is acceptable. Default radius = 1000m if cancelled.
         var radiusStr = window.prompt(
           "Enter search radius in meters (e.g. 1000):", "1000"
         );
@@ -181,7 +183,6 @@
     setTileLayer: setTileLayer,
     setOpacity: setOpacity,
     onGeometryReady: null, // set by search.js
-    _attachDrawEvents: _attachDrawEvents,
   };
 
   // Initialise on DOMContentLoaded
