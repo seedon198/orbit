@@ -33,6 +33,8 @@ def index():
 @app.route("/api/search", methods=["POST"])
 def search():
     data = request.get_json()
+    if not data:
+        return jsonify({"error": "Request body must be JSON."}), 400
     # Filter requested types to only those available in this account
     available = get_available_item_types()
     requested = data.get("item_types", [])

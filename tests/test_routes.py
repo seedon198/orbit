@@ -124,3 +124,11 @@ def test_search_returns_400_with_aoi_too_large_message(client):
             )
     assert resp.status_code == 400
     assert "too large" in resp.get_json()["error"]
+
+
+def test_search_returns_400_on_empty_body(client):
+    resp = client.post("/api/search", data="{}", content_type="application/json")
+    assert resp.status_code == 400
+    data = resp.get_json()
+    assert data is not None
+    assert "error" in data
