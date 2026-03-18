@@ -2,7 +2,7 @@
 
 OSINT satellite imagery tool — search, filter, and replay Planet imagery for geospatial intelligence and ground truth verification.
 
-![Overview](docs/screenshots/overview-aoi-selection.png)
+![Overview](docs/screenshots/island-high-detail.png)
 
 ---
 
