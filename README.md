@@ -1,6 +1,10 @@
-# orbit
+<p align="center">
+  <img src="docs/logo.png" width="120" alt="orbit logo" />
+</p>
 
-OSINT satellite imagery tool — search, filter, and replay Planet imagery for geospatial intelligence and ground truth verification.
+<h1 align="center">orbit</h1>
+
+<p align="center">OSINT satellite imagery tool — search, filter, and replay Planet imagery for geospatial intelligence and ground truth verification.</p>
 
 ![Overview](docs/screenshots/island-high-detail.png)
 
