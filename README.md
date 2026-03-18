@@ -2,8 +2,7 @@
 
 OSINT satellite imagery tool — search, filter, and replay Planet imagery for geospatial intelligence and ground truth verification.
 
-![Orbit Interface](docs/screenshots/interface.png)
-<!-- TODO: add screenshot -->
+![Overview](docs/screenshots/overview-aoi-selection.png)
 
 ---
 
@@ -22,10 +21,24 @@ Designed for OSINT, geospatial intelligence, ground truth verification, and chan
 
 ## Screenshots
 
-| Map + AOI selection | Results panel | Timeline replay |
-|---|---|---|
-| ![Map](docs/screenshots/map.png) | ![Results](docs/screenshots/results.png) | ![Timeline](docs/screenshots/timeline.png) |
-<!-- TODO: add screenshots -->
+### AOI selection — Persian Gulf / Strait of Hormuz
+![AOI Selection](docs/screenshots/overview-aoi-selection.png)
+
+### Drawing a search area over the Oman coast
+![Drawing AOI](docs/screenshots/drawing-aoi-oman-coast.png)
+
+### Ship detection — zoomed satellite imagery
+![Ship Detection](docs/screenshots/ship-detection-zoomed.png)
+*PlanetScope imagery zoomed in to detect a vessel at sea*
+
+### Satellite tile overlay — Papua New Guinea
+![Tile Overlay Papua](docs/screenshots/tile-overlay-papua.png)
+
+### Island overview with imagery loaded
+![Island Overview](docs/screenshots/island-satellite-overview.png)
+
+### High-detail island imagery with results panel
+![Island Detail](docs/screenshots/island-high-detail.png)
 
 ---
 
