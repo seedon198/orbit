@@ -5,3 +5,9 @@ __pycache__/
 .pytest_cache/
 .superpowers/
 venv/
+.venv/
+*.egg-info/
+dist/
+build/
+.DS_Store
+*.log
