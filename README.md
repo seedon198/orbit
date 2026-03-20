@@ -35,7 +35,7 @@ Designed for OSINT, geospatial intelligence, ground truth verification, and chan
 ![Ship Detection](docs/screenshots/ship-detection-zoomed.png)
 *PlanetScope imagery zoomed in to detect a vessel at sea*
 
-### Satellite tile overlay — Papua New Guinea
+### Satellite tile overlay — Boracay, Philipines
 ![Tile Overlay Papua](docs/screenshots/tile-overlay-papua.png)
 
 ### Island overview with imagery loaded
