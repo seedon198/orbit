@@ -4,7 +4,7 @@
 
 <h1 align="center">orbit</h1>
 
-<p align="center">OSINT satellite imagery tool — search, filter, and replay Planet imagery for geospatial intelligence and ground truth verification.</p>
+<p align="center">OSINT satellite imagery tool - search, filter, and replay Planet imagery for geospatial intelligence and ground truth verification.</p>
 
 ![Overview](docs/screenshots/island-high-detail.png)
 
