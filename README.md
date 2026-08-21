@@ -19,23 +19,23 @@ Orbit is a local web app that lets you:
 - **View and compare results** sorted by recency and resolution in a floating panel with thumbnails
 - **Replay imagery over time** using a timeline slider with per-date dot markers, play/pause, speed control, and a calendar picker
 
-Designed for OSINT, geospatial intelligence, ground truth verification, and change detection workflows. Runs entirely locally — no data leaves your machine except the API queries to Planet.
+Designed for OSINT, geospatial intelligence, ground truth verification, and change detection workflows. Runs entirely locally - no data leaves your machine except the API queries to Planet.
 
 ---
 
 ## Screenshots
 
-### AOI selection — Persian Gulf / Strait of Hormuz
+### AOI selection - Persian Gulf / Strait of Hormuz
 ![AOI Selection](docs/screenshots/overview-aoi-selection.png)
 
 ### Drawing a search area over the Oman coast
 ![Drawing AOI](docs/screenshots/drawing-aoi-oman-coast.png)
 
-### Ship detection — zoomed satellite imagery
+### Ship detection - zoomed satellite imagery
 ![Ship Detection](docs/screenshots/ship-detection-zoomed.png)
 *PlanetScope imagery zoomed in to detect a vessel at sea*
 
-### Satellite tile overlay — Boracay, Philipines
+### Satellite tile overlay - Boracay, Philipines
 ![Tile Overlay Papua](docs/screenshots/tile-overlay-papua.png)
 
 ### Island overview with imagery loaded
@@ -51,7 +51,7 @@ Designed for OSINT, geospatial intelligence, ground truth verification, and chan
 1. Go to [planet.com](https://www.planet.com) and create a free account
 2. Navigate to **Account Settings → API Keys**
 3. Copy your API key
-4. Check your subscription tier — free accounts include access to **PlanetScope (PSScene)** imagery; SkySat requires a paid subscription
+4. Check your subscription tier - free accounts include access to **PlanetScope (PSScene)** imagery; SkySat requires a paid subscription
 
 > **Tip:** Planet offers a [free Education & Research program](https://www.planet.com/markets/education-and-research/) with expanded data access for qualifying users.
 
@@ -104,11 +104,11 @@ Open **http://localhost:5000** in your browser.
 
 ## Usage
 
-1. **Draw an AOI** — use the toolbar in the top bar to draw a polygon, rectangle, circle, or drop a point with a radius
-2. **Set filters** — choose image sources, date range, and max cloud cover
-3. **Click Search** — results appear in the floating panel on the right
-4. **Click a result card** — loads the image as a tile overlay on the map
-5. **Use the timeline** — scrub through dates, hit play to replay imagery over time, or use the calendar to jump to a specific date
+1. **Draw an AOI** - use the toolbar in the top bar to draw a polygon, rectangle, circle, or drop a point with a radius
+2. **Set filters** - choose image sources, date range, and max cloud cover
+3. **Click Search** - results appear in the floating panel on the right
+4. **Click a result card** - loads the image as a tile overlay on the map
+5. **Use the timeline** - scrub through dates, hit play to replay imagery over time, or use the calendar to jump to a specific date
 
 ---
 
@@ -143,7 +143,7 @@ orbit/
         └── timeline.js  # Slider, play/pause, calendar
 ```
 
-The Flask backend proxies all Planet API requests — the API key is **never** sent to the browser.
+The Flask backend proxies all Planet API requests - the API key is **never** sent to the browser.
 
 ---
 
